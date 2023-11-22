@@ -1,0 +1,8 @@
+{
+  "functions": {
+    "api/v1/ai/chat/completions/proxy": {
+      "runtime": "python3.9",
+      "includeFiles": ["proxy_server.py", "requirements.txt"]
+    }
+  }
+}
