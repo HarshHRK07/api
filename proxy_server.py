@@ -1,26 +1,30 @@
 from flask import Flask, request, jsonify
 import requests
-import os
 
 app = Flask(__name__)
 
-@app.route('/api/v1/ai/chat/completions/<path:path>', methods=['GET', 'POST'])
-def proxy(path):
-    target_url = 'https://api.voidevs.com/v1/ai/chat/completions/' + path
-    headers = {key: value for (key, value) in request.headers if key != 'Host'}
+@app.route('/gpt', methods=['GET'])
+def generate_response():
+    try:
+        prompt = request.args.get('prompt', '')
+        
+        url = "https://chatgptlogin.ai/chat/chat_api_stream"
+        payload = {"question": prompt, "chat_id": "65d1a000c0e7117ba52d79c0", "timestamp": 9999999999}
+        headers = {'User-Agent': "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Mobile Safari/537.36",
+                   'referer': "https://chatgptlogin.ai/chat/"}
 
-    if request.method == 'GET':
-        response = requests.get(target_url, headers=headers)
-    elif request.method == 'POST':
-        response = requests.post(target_url, data=request.get_data(), headers=headers)
-    else:
-        return jsonify({'error': 'Unsupported HTTP method'}), 500
+        response = requests.post(url, json=payload, headers=headers)
 
-    excluded_headers = ['content-encoding', 'content-length', 'transfer-encoding', 'connection']
-    headers = [(name, value) for (name, value) in response.raw.headers.items() if name.lower() not in excluded_headers]
+        # Split the response into individual chunks
+        chunks = response.text.split("data: ")
 
-    return jsonify(content=response.json(), headers=headers), response.status_code
+        # Extract the content from each chunk and concatenate them
+        content = ''.join(chunk.split('"delta":')[1].split('}')[0].split(':')[-1].strip('"') for chunk in chunks if '"delta"' in chunk)
+
+        return jsonify({"response": content})
+    except Exception as e:
+        return jsonify({"error": str(e)})
 
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0', port=int(os.environ.get('PORT', 8080)))
-  
+    app.run(host='0.0.0.0', port=5001, debug=True)
+    
