@@ -27,8 +27,9 @@ headers = {
 # Define route for the root URL
 @app.route('/')
 def home():
-    # Render the index.html file
-    return render_template('index.html')
+    # Serve the index.html file
+    return send_file('index.html')
+  
 @app.route('/openai', methods=['GET'])
 def get_gpt_response():
     input_text = request.args.get('gpt4')
