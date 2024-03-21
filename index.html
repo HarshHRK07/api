@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>API Documentation</title>
+    <title>HRK'S AI API DOCS</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -47,7 +47,7 @@
     </style>
 </head>
 <body>
-    <h1>API Documentation</h1>
+    <h1>HRK'S AI API DOCS</h1>
 
     <div class="endpoint">
         <h2>GET /openai</h2>
@@ -57,9 +57,9 @@
             <li><code>gpt4</code> (required): Input text for the GPT-4 model.</li>
         </ul>
         <p><strong>Example:</strong></p>
-        <pre>GET /openai?gpt4=How%20are%20you%3F</pre>
+        <pre>GET /openai?gpt4=Hello</pre>
         <p><strong>Response:</strong></p>
-        <pre>{"response": "GPT-4 response text"}</pre>
+        <pre>{"response": "Hi! How can i assist you today?"}</pre>
     </div>
 
     <div class="endpoint">
@@ -67,12 +67,12 @@
         <p><strong>Description:</strong> Get a response from the Claude v2 model.</p>
         <p><strong>Parameters:</strong></p>
         <ul>
-            <li><code>claudev2</code> (required): Input text for the Claude v2 model.</li>
+            <li><code>claudeV2</code> (required): Input text for the Claude v2 model.</li>
         </ul>
         <p><strong>Example:</strong></p>
-        <pre>GET /anthropic?claudev2=Tell%20me%20a%20joke.</pre>
+        <pre>GET /anthropic?claudev2=Hi.</pre>
         <p><strong>Response:</strong></p>
-        <pre>{"response": "Claude v2 response text"}</pre>
+        <pre>{"response": "Hello!"}</pre>
     </div>
 
 </body>
