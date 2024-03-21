@@ -3,6 +3,7 @@ import threading
 import re
 import os
 import ssl
+import tempfile
 from http.server import SimpleHTTPRequestHandler, HTTPServer
 
 # Domains to intercept
@@ -10,8 +11,8 @@ STRIP_DOMAINS = ["api.stripe.com", "js.stripe.com", "m.stripe.com"]
 
 # Proxy server configuration
 PROXY_HOST = "0.0.0.0"  # Listen on all network interfaces
-PROXY_PORT = int(os.environ.get("PORT", 10000))  # Use the PORT environment variable if available, else default to 8080
-CERT_PATH = "/tmp/ca.pem"  # Use a temporary directory for certificate
+PROXY_PORT = int(os.environ.get("PORT", 10000))  # Use the PORT environment variable if available, else default to 10000
+CERT_PATH = os.path.join(tempfile.gettempdir(), "ca.pem")  # Use a temporary directory for certificate
 
 # Function to modify request body
 def modify_request_body(request_body):
@@ -90,4 +91,4 @@ if __name__ == "__main__":
 
     # Start the proxy server
     start_proxy()
-            
+    
