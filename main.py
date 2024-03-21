@@ -55,24 +55,31 @@ def serve_certificate():
             else:
                 super().do_GET()
 
+    context = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)
+    context.load_cert_chain(CERT_PATH)
+
     httpd = HTTPServer((PROXY_HOST, PROXY_PORT), CertHTTPRequestHandler)
-    httpd.socket = ssl.wrap_socket(httpd.socket, certfile=CERT_PATH, server_side=True)
+    httpd.socket = context.wrap_socket(httpd.socket, server_side=True)
     httpd.serve_forever()
 
 # Function to start the proxy server
 def start_proxy():
-    # Create a socket object
-    server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    # Bind the socket to the local host and port
-    server_socket.bind((PROXY_HOST, PROXY_PORT))
-    # Start listening for incoming connections
-    server_socket.listen(5)
+    try:
+        # Create a socket object
+        server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        # Bind the socket to the local host and port
+        server_socket.bind((PROXY_HOST, PROXY_PORT))
+    except OSError as e:
+        print(f"Error: {e}. Failed to bind to port {PROXY_PORT}. Please choose a different port.")
+        return
 
     # Print the IP address and port for remote connection
     ip_address = "0.0.0.0" if PROXY_HOST == "0.0.0.0" else socket.gethostbyname(socket.gethostname())
     print(f"Proxy server is listening on {ip_address}:{PROXY_PORT}...")
 
     while True:
+        # Start listening for incoming connections
+        server_socket.listen(5)
         # Accept a new connection
         client_socket, client_address = server_socket.accept()
         print(f"Accepted connection from {client_address[0]}:{client_address[1]}")
@@ -91,4 +98,4 @@ if __name__ == "__main__":
 
     # Start the proxy server
     start_proxy()
-    
+            
