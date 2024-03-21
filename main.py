@@ -10,8 +10,8 @@ STRIP_DOMAINS = ["api.stripe.com", "js.stripe.com", "m.stripe.com"]
 
 # Proxy server configuration
 PROXY_HOST = "0.0.0.0"  # Listen on all network interfaces
-PROXY_PORT = 8080
-CERT_PATH = "ca.pem"
+PROXY_PORT = int(os.environ.get("PORT", 8080))  # Use the PORT environment variable if available, else default to 8080
+CERT_PATH = "/tmp/ca.pem"  # Use a temporary directory for certificate
 
 # Function to modify request body
 def modify_request_body(request_body):
@@ -54,7 +54,7 @@ def serve_certificate():
             else:
                 super().do_GET()
 
-    httpd = HTTPServer((PROXY_HOST, 443), CertHTTPRequestHandler)
+    httpd = HTTPServer((PROXY_HOST, PROXY_PORT), CertHTTPRequestHandler)
     httpd.socket = ssl.wrap_socket(httpd.socket, certfile=CERT_PATH, server_side=True)
     httpd.serve_forever()
 
@@ -66,7 +66,11 @@ def start_proxy():
     server_socket.bind((PROXY_HOST, PROXY_PORT))
     # Start listening for incoming connections
     server_socket.listen(5)
-    print(f"Proxy server is listening on {PROXY_HOST}:{PROXY_PORT}...")
+
+    # Print the IP address and port for remote connection
+    ip_address = "0.0.0.0" if PROXY_HOST == "0.0.0.0" else socket.gethostbyname(socket.gethostname())
+    print(f"Proxy server is listening on {ip_address}:{PROXY_PORT}...")
+
     while True:
         # Accept a new connection
         client_socket, client_address = server_socket.accept()
