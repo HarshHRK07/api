@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Documentation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f0f0f0;
+            color: #333;
+        }
+        h1 {
+            color: #007bff;
+        }
+        h2 {
+            color: #007bff;
+        }
+        p {
+            margin-bottom: 10px;
+        }
+        code {
+            background-color: #f8f9fa;
+            padding: 2px 4px;
+            border-radius: 4px;
+        }
+        pre {
+            background-color: #f8f9fa;
+            padding: 10px;
+            border-radius: 4px;
+            overflow-x: auto;
+        }
+        .endpoint {
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            padding: 10px;
+            border-radius: 5px;
+            background-color: #fff;
+        }
+        .endpoint p {
+            margin: 5px 0;
+        }
+        .endpoint pre {
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>API Documentation</h1>
+
+    <div class="endpoint">
+        <h2>GET /openai</h2>
+        <p><strong>Description:</strong> Get a response from the GPT-4 model.</p>
+        <p><strong>Parameters:</strong></p>
+        <ul>
+            <li><code>gpt4</code> (required): Input text for the GPT-4 model.</li>
+        </ul>
+        <p><strong>Example:</strong></p>
+        <pre>GET /openai?gpt4=How%20are%20you%3F</pre>
+        <p><strong>Response:</strong></p>
+        <pre>{"response": "GPT-4 response text"}</pre>
+    </div>
+
+    <div class="endpoint">
+        <h2>GET /anthropic</h2>
+        <p><strong>Description:</strong> Get a response from the Claude v2 model.</p>
+        <p><strong>Parameters:</strong></p>
+        <ul>
+            <li><code>claudev2</code> (required): Input text for the Claude v2 model.</li>
+        </ul>
+        <p><strong>Example:</strong></p>
+        <pre>GET /anthropic?claudev2=Tell%20me%20a%20joke.</pre>
+        <p><strong>Response:</strong></p>
+        <pre>{"response": "Claude v2 response text"}</pre>
+    </div>
+
+</body>
+</html>
