@@ -68,5 +68,6 @@ def get_gpt_response():
     return jsonify({'response': combined_content})
 
 if __name__ == '__main__':
-    app.run(debug=True)
-  
+    # Run the app on external port 5000
+    app.run(debug=True, host='0.0.0.0', port=5000)
+    
