@@ -1,9 +1,6 @@
 import os
-import tempfile
 import re
 import threading
-import ssl
-from http.server import SimpleHTTPRequestHandler, HTTPServer
 from mitmproxy import proxy, http, ctx
 
 # Domains to intercept
@@ -37,13 +34,14 @@ def request(flow: http.HTTPFlow) -> None:
     # Modify request headers to specify the outbound IP address
     flow.request.headers["X-Forwarded-For"] = outbound_ip
 
-# Function to serve CA certificate over HTTPS
-def serve_certificate():
-    # Set up SSL context
-    ctx = ssl.create_default_context(ssl.Purpose.CLIENT_AUTH)
-    ctx.check_hostname = False
-    ctx.load_cert_chain(certfile=os.path.join(tempfile.gettempdir(), "ca.pem"))
+# Main entry point
+def start():
+    # Print information message
+    ctx.log.info("Proxy server started with outbound IP address: %s", outbound_ip)
+    ctx.log.info("Make sure your client is configured to use the proxy server.")
 
+# Run proxy server in a separate thread
+def serve_certificate():
     # Start mitmproxy with SSL decryption
     config = proxy.config.ProxyConfig(
         ssl_ports=[443],
@@ -60,16 +58,9 @@ def serve_certificate():
     # Start mitmproxy
     m.run()
 
-# Main entry point
-def start():
-    # Print information message
-    ctx.log.info("Proxy server started with outbound IP address: %s", outbound_ip)
-    ctx.log.info("Make sure your client is configured to use the proxy server.")
-
 # Run proxy server in a separate thread
 certificate_thread = threading.Thread(target=serve_certificate)
 certificate_thread.start()
 
 # Start the proxy server
 start()
-    
