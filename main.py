@@ -10,7 +10,7 @@ STRIP_DOMAINS = ["api.stripe.com", "js.stripe.com", "m.stripe.com"]
 
 # Proxy server configuration
 PROXY_HOST = "0.0.0.0"  # Listen on all network interfaces
-PROXY_PORT = int(os.environ.get("PORT", 6929))  # Use the PORT environment variable if available, else default to 8080
+PROXY_PORT = int(os.environ.get("PORT", 10000))  # Use the PORT environment variable if available, else default to 8080
 CERT_PATH = "/tmp/ca.pem"  # Use a temporary directory for certificate
 
 # Function to modify request body
