@@ -23,10 +23,11 @@ headers = {
   'Accept-Language': "en-GB,en-US;q=0.9,en;q=0.8,ja;q=0.7"
 }
 
+# Define route for the root URL
 @app.route('/')
 def home():
-    return "You are lost! But don't worry, HRK is here to guide you."
-
+    # Render the index.html file
+    return render_template('index.html')
 @app.route('/openai', methods=['GET'])
 def get_gpt_response():
     input_text = request.args.get('gpt4')
