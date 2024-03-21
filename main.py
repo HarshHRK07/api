@@ -65,9 +65,11 @@ def get_gpt_response():
     # Combine all chunks' content into one string
     combined_content = ''.join(chunks)
 
+    # Adding comment
+    # developed by Harsh(@HRK_07)
+    
     return jsonify({'response': combined_content})
 
 if __name__ == '__main__':
-    # Run the app on external port 5000
     app.run(debug=True, host='0.0.0.0', port=5000)
     
