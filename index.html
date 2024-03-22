@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HRK'S AI API DOCS</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/styles/github.min.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f8f8;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        h1, h2, h3 {
+            color: #333;
+            margin-top: 0;
+        }
+        h2 {
+            margin-top: 20px;
+        }
+        p {
+            margin-bottom: 1em;
+        }
+        code {
+            background-color: #f0f0f0;
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+        pre {
+            background-color: #f0f0f0;
+            padding: 10px;
+            border-radius: 4px;
+            overflow-x: auto;
+            margin: 10px 0;
+        }
+        .endpoint {
+            margin-bottom: 40px;
+        }
+        .endpoint h2 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        .endpoint h3 {
+            font-size: 20px;
+            margin-bottom: 5px;
+        }
+        .integration-code {
+            margin-top: 20px;
+            position: relative;
+        }
+        .copy-btn {
+            cursor: pointer;
+            padding: 4px 8px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            font-size: 14px;
+            position: absolute;
+            top: 5px;
+            right: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>HRK'S AI API DOCS</h1>
+
+        <div class="endpoint">
+            <h2>GET /openai/gpt</h2>
+            <p><strong>Description:</strong> Retrieve a response from another GPT service.</p>
+            <p><strong>Parameters:</strong></p>
+            <ul>
+                <li><code>prompt</code> (required): Input text for the GPT service.</li>
+            </ul>
+            <p><strong>Example:</strong></p>
+            <pre>GET /openai/gpt?prompt=Hello</pre>
+            <p><strong>Response:</strong></p>
+            <pre>{"response": "Hi! How can I assist you today?\nDeveloper: Harsh (TG ID = @HRK_07)"}</pre>
+            <h3>Integration:</h3>
+            <div class="integration-code">
+                <button class="copy-btn">Copy</button>
+                <h4>Python Integration:</h4>
+                <pre><code>
+import requests
+
+url = 'https://green-devil.tech/openai/gpt'
+params = {'prompt': 'Hello'}
+
+response = requests.get(url, params=params)
+print(response.json())
+                </code></pre>
+            </div>
+            <div class="integration-code">
+                <button class="copy-btn">Copy</button>
+                <h4>cURL Integration:</h4>
+                <pre><code>
+curl -X GET 'https://green-devil.tech/openai/gpt?prompt=Hello'
+                </code></pre>
+            </div>
+            <div class="integration-code">
+                <button class="copy-btn">Copy</button>
+                <h4>Next.js Integration:</h4>
+                <pre><code>
+import fetch from 'isomorphic-fetch';
+
+async function fetchData() {
+  const response = await fetch('https://green-devil.tech/openai/gpt?prompt=Hello');
+  const data = await response.json();
+  console.log(data);
+}
+
+fetchData();
+                </code></pre>
+            </div>
+        </div>
+
+        <div class="endpoint">
+            <h2>GET /openai/gpt4</h2>
+            <p><strong>Description:</strong> Retrieve a response from the GPT-4 model.</p>
+            <p><strong>Parameters:</strong></p>
+            <ul>
+                <li><code>prompt</code> (required): Input text for the GPT-4 model.</li>
+            </ul>
+            <p><strong>Example:</strong></p>
+            <pre>GET /openai/gpt4?prompt=Hello</pre>
+            <p><strong>Response:</strong></p>
+            <pre>{"response": "Hi! How can I assist you today?\nDeveloper: Harsh (TG ID = @HRK_07)"}</pre>
+            <h3>Integration:</h3>
+            <div class="integration-code">
+                <button class="copy-btn">Copy</button>
+                <h4>Python Integration:</h4>
+                <pre><code>
+import requests
+
+url = 'https://green-devil.tech/openai/gpt4'
+params = {'prompt': 'Hello'}
+
+response = requests.get(url, params=params)
+print(response.json())
+                </code></pre>
+            </div>
+            <div class="integration-code">
+                <button class="copy-btn">Copy</button>
+                <h4>cURL Integration:</h4>
+                <pre><code>
+curl -X GET 'https://green-devil.tech/openai/gpt4?prompt=Hello'
+                </code></pre>
+            </div>
+            <div class="integration-code">
+                <button class="copy-btn">Copy</button>
+                <h4>Next.js Integration:</h4>
+                <pre><code>
+import fetch from 'isomorphic-fetch';
+
+async function fetchData() {
+  const response = await fetch('https://green-devil.tech/openai/gpt4?prompt=Hello');
+  const data = await response.json();
+  console.log(data);
+}
+
+fetchData();
+                </code></pre>
+            </div>
+        </div>
+
+        <div class="endpoint">
+            <h2>GET /anthropic/claudeV2</h2>
+            <p><strong>Description:</strong> Retrieve a response from the Claude v2 model.</p>
+            <p><strong>Parameters:</strong></p>
+            <ul>
+                <li><code>prompt</code> (required): Input text for the Claude v2 model.</li>
+            </ul>
+            <p><strong>Example:</strong></p>
+            <pre>GET /anthropic/claudeV2?prompt=Hi.</pre>
+            <p><strong>Response:</strong></p>
+            <pre>{"response": "Hello!\nDeveloper: Harsh (TG ID = @HRK_07)"}</pre>
+            <h3>Integration:</h3>
+            <div class="integration-code">
+                <button class="copy-btn">Copy</button>
+                <h4>Python Integration:</h4>
+                <pre><code>
+import requests
+
+url = 'https://green-devil.tech/anthropic/claudeV2'
+params = {'prompt': 'Hi'}
+
+response = requests.get(url, params=params)
+print(response.json())
+                </code></pre>
+            </div>
+            <div class="integration-code">
+                <button class="copy-btn">Copy</button>
+                <h4>cURL Integration:</h4>
+                <pre><code>
+curl -X GET 'https://green-devil.tech/anthropic/claudeV2?prompt=Hi'
+                </code></pre>
+            </div>
+            <div class="integration-code">
+                <button class="copy-btn">Copy</button>
+                <h4>Next.js Integration:</h4>
+                <pre><code>
+import fetch from 'isomorphic-fetch';
+
+async function fetchData() {
+  const response = await fetch('https://green-devil.tech/anthropic/claudeV2?prompt=Hi');
+  const data = await response.json();
+  console.log(data);
+}
+
+fetchData();
+                </code></pre>
+            </div>
+        </div>
+
+        <!-- Add more endpoints here if needed -->
+
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/highlight.min.js"></script>
+    <script>
+        document.querySelectorAll('.copy-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const codeBlock = btn.nextElementSibling.querySelector('code');
+                navigator.clipboard.writeText(codeBlock.textContent.trim());
+                alert('Code copied to clipboard!');
+            });
+        });
+        hljs.initHighlightingOnLoad();
+    </script>
+</body>
+</html>
+
+                    
