@@ -169,6 +169,7 @@ def openai_endpoint():
         return jsonify({"error": "An error occurred: {}".format(e)})
 
 if __name__ == '__main__':
-    app.run(debug=True)
-    
+    # Run the Flask app on external port 5000
+    app.run(host='0.0.0.0', port=5000, debug=True)
+
         
