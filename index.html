@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HRK's AI API Docs</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/styles/default.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #f0f0f0;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.endpoint {
+    margin-bottom: 20px;
+}
+
+h1, h2, h4 {
+    color: #333;
+}
+
+.integration-code {
+    margin-bottom: 20px;
+}
+
+.integration-code h4 {
+    margin-bottom: 10px;
+    color: #555;
+}
+
+.integration-code pre {
+    background-color: #eee;
+    padding: 10px;
+    border-radius: 6px;
+    overflow-x: auto;
+}
+
+.integration-code button {
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+    outline: none;
+}
+
+.integration-code button:hover {
+    color: #007bff;
+}
+
+.integration-code .copy-btn {
+    float: right;
+    color: #999;
+    font-size: 18px;
+}
+
+.integration-code .copy-btn:hover {
+    color: #555;
+}
+
+.integration-code .copy-btn:focus {
+    outline: none;
+}
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>HRK's AI API Docs</h1>
+
+        <div class="endpoint">
+    <h2>GET /openai/gpt</h2>
+    
+    <!-- Python Integration -->
+    <div class="integration-code python">
+        <button class="copy-btn" title="Copy to clipboard"><i class="fas fa-copy"></i></button>
+        <h4>Python Integration:</h4>
+        <pre><code class="python">
+import requests
+
+url = 'https://green-devil.tech/openai/gpt'
+params = {'prompt': 'Hello'}
+
+response = requests.get(url, params=params)
+print(response.json())
+        </code></pre>
+    </div>
+
+    <!-- cURL Integration -->
+    <div class="integration-code curl">
+        <button class="copy-btn" title="Copy to clipboard"><i class="fas fa-copy"></i></button>
+        <h4>cURL Integration:</h4>
+        <pre><code class="bash">
+curl https://green-devil.tech/openai/gpt?prompt=Hello
+        </code></pre>
+    </div>
+
+    <!-- Next.js Integration -->
+    <div class="integration-code nextjs">
+        <button class="copy-btn" title="Copy to clipboard"><i class="fas fa-copy"></i></button>
+        <h4>Next.js Integration:</h4>
+        <pre><code class="javascript">
+import axios from 'axios';
+
+const handleSubmit = async (prompt) => {
+  const response = await axios.get('https://green-devil.tech/openai/gpt', {
+    params: {
+      prompt
+    }
+  });
+
+  console.log(response.data);
+}
+        </code></pre>
+    </div>
+
+    <!-- Node.js Integration -->
+    <div class="integration-code nodejs">
+        <button class="copy-btn" title="Copy to clipboard"><i class="fas fa-copy"></i></button>
+        <h4>Node.js Integration:</h4>
+        <pre><code class="javascript">
+const https = require('https');
+
+const options = {
+  hostname: 'green-devil.tech',
+  path: '/openai/gpt?prompt=Hello',
+  method: 'GET'
+};
+
+const req = https.request(options, res => {
+  console.log(`statusCode: ${res.statusCode}`);
+
+  res.on('data', d => {
+    process.stdout.write(d);
+  });
+});
+
+req.on('error', error => {
+  console.error(error);
+});
+
+req.end();
+        </code></pre>
+    </div>
+
+    <!-- Java Integration -->
+    <div class="integration-code java">
+        <button class="copy-btn" title="Copy to clipboard"><i class="fas fa-copy"></i></button>
+        <h4>Java Integration:</h4>
+        <pre><code class="java">
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+
+public class OpenAIGPTRequest {
+    public static void main(String[] args) throws Exception {
+        String urlString = "https://green-devil.tech/openai/gpt?prompt=Hello";
+        URL url = new URL(urlString);
+        HttpURLConnection con = (HttpURLConnection) url.openConnection();
+        con.setRequestMethod("GET");
+
+        int responseCode = con.getResponseCode();
+        if (responseCode == HttpURLConnection.HTTP_OK) {
+            BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
+            String inputLine;
+            StringBuilder response = new StringBuilder();
+            while ((inputLine = in.readLine()) != null) {
+                response.append(inputLine);
+            }
+            in.close();
+            System.out.println(response.toString());
+        } else {
+            System.out.println("GET request failed: " + responseCode);
+        }
+    }
+}
+        </code></pre>
+    </div>
+
+    <!-- PHP Integration -->
+    <div class="integration-code php">
+        <button class="copy-btn" title="Copy to clipboard"><i class="fas fa-copy"></i></button>
+        <h4>PHP Integration:</h4>
+        <pre><code class="php">
+&lt;?php
+$url = "https://green-devil.tech/openai/gpt?prompt=Hello";
+$response = file_get_contents($url);
+echo $response;
+?>
+        </code></pre>
+    </div>
+</div>
+
+
+<div class="endpoint">
+    <h2>GET /openai/gpt4</h2>
+    
+    <!-- Python Integration -->
+    <div class="integration-code python">
+        <button class="copy-btn" title="Copy to clipboard"><i class="fas fa-copy"></i></button>
+        <h4>Python Integration:</h4>
+        <pre><code class="python">
+import requests
+
+url = 'https://green-devil.tech/openai/gpt4'
+params = {'prompt': 'Hello'}
+
+response = requests.get(url, params=params)
+print(response.json())
+        </code></pre>
+    </div>
+
+    <!-- cURL Integration -->
+    <div class="integration-code curl">
+        <button class="copy-btn" title="Copy to clipboard"><i class="fas fa-copy"></i></button>
+        <h4>cURL Integration:</h4>
+        <pre><code class="bash">
+curl https://green-devil.tech/openai/gpt4?prompt=Hello
+        </code></pre>
+    </div>
+
+    <!-- Next.js Integration -->
+    <div class="integration-code nextjs">
+        <button class="copy-btn" title="Copy to clipboard"><i class="fas fa-copy"></i></button>
+        <h4>Next.js Integration:</h4>
+        <pre><code class="javascript">
+import axios from 'axios';
+
+const handleSubmit = async (prompt) => {
+  const response = await axios.get('https://green-devil.tech/openai/gpt4', {
+    params: {
+      prompt
+    }
+  });
+
+  console.log(response.data);
+}
+        </code></pre>
+    </div>
+
+    <!-- Node.js Integration -->
+    <div class="integration-code nodejs">
+        <button class="copy-btn" title="Copy to clipboard"><i class="fas fa-copy"></i></button>
+        <h4>Node.js Integration:</h4>
+        <pre><code class="javascript">
+const https = require('https');
+
+const options = {
+  hostname: 'green-devil.tech',
+  path: '/openai/gpt4?prompt=Hello',
+  method: 'GET'
+};
+
+const req = https.request(options, res => {
+  console.log(`statusCode: ${res.statusCode}`);
+
+  res.on('data', d => {
+    process.stdout.write(d);
+  });
+});
+
+req.on('error', error => {
+  console.error(error);
+});
+
+req.end();
+        </code></pre>
+    </div>
+
+    <!-- Java Integration -->
+    <div class="integration-code java">
+        <button class="copy-btn" title="Copy to clipboard"><i class="fas fa-copy"></i></button>
+        <h4>Java Integration:</h4>
+        <pre><code class="java">
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+
+public class OpenAIGPT4Request {
+    public static void main(String[] args) throws Exception {
+        String urlString = "https://green-devil.tech/openai/gpt4?prompt=Hello";
+        URL url = new URL(urlString);
+        HttpURLConnection con = (HttpURLConnection) url.openConnection();
+        con.setRequestMethod("GET");
+
+        int responseCode = con.getResponseCode();
+        if (responseCode == HttpURLConnection.HTTP_OK) {
+            BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
+            String inputLine;
+            StringBuilder response = new StringBuilder();
+            while ((inputLine = in.readLine()) != null) {
+                response.append(inputLine);
+            }
+            in.close();
+            System.out.println(response.toString());
+        } else {
+            System.out.println("GET request failed: " + responseCode);
+        }
+    }
+}
+        </code></pre>
+    </div>
+
+    <!-- PHP Integration -->
+    <div class="integration-code php">
+        <button class="copy-btn" title="Copy to clipboard"><i class="fas fa-copy"></i></button>
+        <h4>PHP Integration:</h4>
+        <pre><code class="php">
+&lt;?php
+$url = "https://green-devil.tech/openai/gpt4?prompt=Hello";
+$response = file_get_contents($url);
+echo $response;
+?>
+        </code></pre>
+    </div>
+</div>
+
+
+        <div class="endpoint">
+    <h2>GET /anthropic/claudeV2</h2>
+    
+    <!-- Python Integration -->
+    <div class="integration-code python">
+        <button class="copy-btn" title="Copy to clipboard"><i class="fas fa-copy"></i></button>
+        <h4>Python Integration:</h4>
+        <pre><code class="python">
+import requests
+
+url = 'https://green-devil.tech/anthropic/claudeV2'
+params = {'prompt': 'Hello'}
+
+response = requests.get(url, params=params)
+print(response.json())
+        </code></pre>
+    </div>
+
+    <!-- cURL Integration -->
+    <div class="integration-code curl">
+        <button class="copy-btn" title="Copy to clipboard"><i class="fas fa-copy"></i></button>
+        <h4>cURL Integration:</h4>
+        <pre><code class="bash">
+curl https://green-devil.tech/anthropic/claudeV2?prompt=Hello
+        </code></pre>
+    </div>
+
+    <!-- Next.js Integration -->
+    <div class="integration-code nextjs">
+        <button class="copy-btn" title="Copy to clipboard"><i class="fas fa-copy"></i></button>
+        <h4>Next.js Integration:</h4>
+        <pre><code class="javascript">
+import axios from 'axios';
+
+const handleSubmit = async (prompt) => {
+  const response = await axios.get('https://green-devil.tech/anthropic/claudeV2', {
+    params: {
+      prompt
+    }
+  });
+
+  console.log(response.data);
+}
+        </code></pre>
+    </div>
+
+    <!-- Node.js Integration -->
+    <div class="integration-code nodejs">
+        <button class="copy-btn" title="Copy to clipboard"><i class="fas fa-copy"></i></button>
+        <h4>Node.js Integration:</h4>
+        <pre><code class="javascript">
+const https = require('https');
+
+const options = {
+  hostname: 'green-devil.tech',
+  path: '/anthropic/claudeV2?prompt=Hello',
+  method: 'GET'
+};
+
+const req = https.request(options, res => {
+  console.log(`statusCode: ${res.statusCode}`);
+
+  res.on('data', d => {
+    process.stdout.write(d);
+  });
+});
+
+req.on('error', error => {
+  console.error(error);
+});
+
+req.end();
+        </code></pre>
+    </div>
+
+    <!-- Java Integration -->
+    <div class="integration-code java">
+        <button class="copy-btn" title="Copy to clipboard"><i class="fas fa-copy"></i></button>
+        <h4>Java Integration:</h4>
+        <pre><code class="java">
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+
+public class AnthropicClaudeV2Request {
+    public static void main(String[] args) throws Exception {
+        String urlString = "https://green-devil.tech/anthropic/claudeV2?prompt=Hello";
+        URL url = new URL(urlString);
+        HttpURLConnection con = (HttpURLConnection) url.openConnection();
+        con.setRequestMethod("GET");
+
+        int responseCode = con.getResponseCode();
+        if (responseCode == HttpURLConnection.HTTP_OK) {
+            BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
+            String inputLine;
+            StringBuilder response = new StringBuilder();
+            while ((inputLine = in.readLine()) != null) {
+                response.append(inputLine);
+            }
+            in.close();
+            System.out.println(response.toString());
+        } else {
+            System.out.println("GET request failed: " + responseCode);
+        }
+    }
+}
+        </code></pre>
+    </div>
+
+    <!-- PHP Integration -->
+    <div class="integration-code php">
+        <button class="copy-btn" title="Copy to clipboard"><i class="fas fa-copy"></i></button>
+        <h4>PHP Integration:</h4>
+        <pre><code class="php">
+&lt;?php
+$url = "https://green-devil.tech/anthropic/claudeV2?prompt=Hello";
+$response = file_get_contents($url);
+echo $response;
+?>
+        </code></pre>
+    </div>
+</div>
+
+
+        <div class="endpoint">
+    <h2>GET /ytdl/mp3</h2>
+    
+    <!-- Python Integration -->
+    <div class="integration-code python">
+        <button class="copy-btn" title="Copy to clipboard"><i class="fas fa-copy"></i></button>
+        <h4>Python Integration:</h4>
+        <pre><code class="python">
+import requests
+
+url = 'https://green-devil.tech/ytdl/mp3'
+params = {'url': 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'}
+
+response = requests.get(url, params=params)
+with open('video.mp3', 'wb') as f:
+    f.write(response.content)
+print('Download complete!')
+        </code></pre>
+    </div>
+
+    <!-- cURL Integration -->
+    <div class="integration-code curl">
+        <button class="copy-btn" title="Copy to clipboard"><i class="fas fa-copy"></i></button>
+        <h4>cURL Integration:</h4>
+        <pre><code class="bash">
+curl https://green-devil.tech/ytdl/mp3?url=https://www.youtube.com/watch?v=dQw4w9WgXcQ -o video.mp3
+        </code></pre>
+    </div>
+
+    <!-- Next.js Integration -->
+    <div class="integration-code nextjs">
+        <button class="copy-btn" title="Copy to clipboard"><i class="fas fa-copy"></i></button>
+        <h4>Next.js Integration:</h4>
+        <pre><code class="javascript">
+import axios from 'axios';
+
+const handleDownload = async (videoUrl) => {
+  const response = await axios.get('https://green-devil.tech/ytdl/mp3', {
+    params: {
+      url: videoUrl
+    },
+    responseType: 'arraybuffer'
+  });
+
+  const blob = new Blob([response.data], { type: 'audio/mpeg' });
+  const url = window.URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'video.mp3';
+  a.click();
+}
+        </code></pre>
+    </div>
+</div>
+<div class="endpoint">
+    <h2>GET /ytdl/mp4</h2>
+    
+    <!-- Python Integration -->
+    <div class="integration-code python">
+        <button class="copy-btn" title="Copy to clipboard"><i class="fas fa-copy"></i></button>
+        <h4>Python Integration:</h4>
+        <pre><code class="python">
+import requests
+
+url = 'https://green-devil.tech/ytdl/mp4'
+params = {'url': 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'}
+
+response = requests.get(url, params=params)
+with open('video.mp4', 'wb') as f:
+    f.write(response.content)
+print('Download complete!')
+        </code></pre>
+    </div>
+
+    <!-- cURL Integration -->
+    <div class="integration-code curl">
+        <button class="copy-btn" title="Copy to clipboard"><i class="fas fa-copy"></i></button>
+        <h4>cURL Integration:</h4>
+        <pre><code class="bash">
+curl https://green-devil.tech/ytdl/mp4?url=https://www.youtube.com/watch?v=dQw4w9WgXcQ -o video.mp4
+        </code></pre>
+    </div>
+
+    <!-- Next.js Integration -->
+    <div class="integration-code nextjs">
+        <button class="copy-btn" title="Copy to clipboard"><i class="fas fa-copy"></i></button>
+        <h4>Next.js Integration:</h4>
+        <pre><code class="javascript">
+import axios from 'axios';
+
+const handleDownload = async (videoUrl) => {
+  const response = await axios.get('https://green-devil.tech/ytdl/mp4', {
+    params: {
+      url: videoUrl
+    },
+    responseType: 'arraybuffer'
+  });
+
+  const blob = new Blob([response.data], { type: 'video/mp4' });
+  const url = window.URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'video.mp4';
+  a.click();
+}
+        </code></pre>
+    </div>
+</div>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/highlight.min.js"></script>
+    <script>
+        // Highlight.js initialization
+        document.addEventListener('DOMContentLoaded', (event) => {
+            document.querySelectorAll('pre code').forEach((block) => {
+                hljs.highlightBlock(block);
+            });
+        });
+
+        // Copy button functionality
+        document.querySelectorAll('.copy-btn').forEach((btn) => {
+            btn.addEventListener('click', () => {
+                const codeBlock = btn.nextElementSibling.querySelector('code');
+                const range = document.createRange();
+                range.selectNode(codeBlock);
+                window.getSelection().removeAllRanges();
+                window.getSelection().addRange(range);
+                document.execCommand('copy');
+                window.getSelection().removeAllRanges();
+                alert('Code copied to clipboard!');
+            });
+        });
+    </script>
+</body>
+</html>
