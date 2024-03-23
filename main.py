@@ -166,7 +166,7 @@ def get_claude_response():
 def openai_endpoint():
     gpt_prompt = request.args.get('prompt')
     gpt_url = "https://chatgpt-online.one/wp-admin/admin-ajax.php"
-    nonce = '77d60c1c19'
+    nonce = '2739d59e4f'
 
     try:
         data = [
