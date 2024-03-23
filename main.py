@@ -42,7 +42,7 @@ def download_youtube(format):
     if format == 'mp3':
         stream = yt.streams.filter(only_audio=True).first()
     elif format == 'mp4':
-        stream = yt.streams.filter(only_video=False).first()
+        stream = yt.streams.filter.first()
     else:
         return "Invalid format. Use 'mp3' or 'mp4'", 400
 
