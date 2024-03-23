@@ -191,7 +191,58 @@ def openai_endpoint():
             return jsonify({"error": "Failed to send message. Status code: {}".format(response.status_code)})
     except Exception as e:
         return jsonify({"error": "An error occurred: {}".format(e)})
+@app.route('/custom/khushi')
+def custom_endpoint():
+    prompt = request.args.get('prompt', default='', type=str)
+    
+    base_url = "https://api.writesonic.com/v1/content/chatsonic/sse"
+    
+    token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjBmYWE5MWMwLWU2NzEtNDQ1MC1hOGQ0LTUxNGVkODkyZTI3OCIsImV4cCI6MTcxMTE5MDY1MH0.TKh32yAFvyZDKi9xk8MnE_LBeBAII3JDF0KXgPQPtBY"
 
+    data = {
+        "seed_text": prompt,
+        "show_web_results": True,
+        "history_id": "82d49d17-314a-43ca-b0f5-99d45916b19e",
+        "selected_image_vendor": "stable-diffusion",
+        "personality_id": "5a35e647-5e32-4bce-9a8d-2911981b20fb",
+        "selected_location": "United States",
+        "enable_memory": True,
+        "enable_detailed": True,
+        "prompt_id": None,
+        "number_memory_messages": 6,
+        "attachments": [],
+        "copilot_mode": False,
+        "ip": "146.196.37.169",
+        "utm_params": {
+            "utm_source": "",
+            "utm_medium": "",
+            "utm_campaign": "",
+            "utm_term": "",
+            "via": "",
+            "$initial_referrer": "",
+            "$initial_referring_domain": ""
+        }
+    }
+
+    base_url_with_token = f"{base_url}?token={token}&data={json.dumps(data)}"
+
+    response = requests.get(base_url_with_token, stream=True)
+
+    output = ""
+    count = 0
+    for line in response.iter_lines():
+        if line.startswith(b'data:'):
+            data = line.split(b':', 1)[1].strip().decode()
+            if count >= 2 and data.lower().startswith("success"):
+                break
+            if count >= 2:
+                output += f"{data.strip()} "
+            count += 1
+
+    # Format the output in a custom format
+    formatted_output = f"Response:\n{output.strip()}\n"
+
+    return formatted_output
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)
     
