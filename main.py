@@ -183,12 +183,12 @@ def custom_endpoint():
     
     base_url = "https://api.writesonic.com/v1/content/chatsonic/sse"
     
-    token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjBmYWE5MWMwLWU2NzEtNDQ1MC1hOGQ0LTUxNGVkODkyZTI3OCIsImV4cCI6MTcxMTE5MDY1MH0.TKh32yAFvyZDKi9xk8MnE_LBeBAII3JDF0KXgPQPtBY"
+    token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjBmYWE5MWMwLWU2NzEtNDQ1MC1hOGQ0LTUxNGVkODkyZTI3OCIsImV4cCI6MTcxMjQyMTg3Mn0.yOiXyV7N0c_7U5rhACVjHq5d5a7n8A3Tr55IAL-m5Sg"
 
     data = {
         "seed_text": prompt,
         "show_web_results": True,
-        "history_id": "82d49d17-314a-43ca-b0f5-99d45916b19e",
+        "history_id": "b3aebe2d-c3b8-44ee-b4bb-e51bd2f89be5",
         "selected_image_vendor": "stable-diffusion",
         "personality_id": "5a35e647-5e32-4bce-9a8d-2911981b20fb",
         "selected_location": "United States",
