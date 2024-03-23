@@ -40,11 +40,16 @@ def download_youtube(format):
 
     yt = YouTube(url)
     if format == 'mp3':
-        stream = yt.streams.filter(only_audio=True).first()
+        # Get the highest quality audio stream
+        stream = yt.streams.filter(only_audio=True).order_by('abr').desc().first()
     elif format == 'mp4':
-        stream = yt.streams.filter.first()
+        # Get the highest quality video stream
+        stream = yt.streams.filter(progressive=True).order_by('resolution').desc().first()
     else:
         return "Invalid format. Use 'mp3' or 'mp4'", 400
+
+    if not stream:
+        return "No suitable stream found for the provided URL and format", 400
 
     print("Downloading started")
 
@@ -59,6 +64,7 @@ def download_youtube(format):
         return redirect(f'/download/{unique_id}')
 
     return redirect_to_download(None)
+    
 
 @app.route('/download/<unique_id>', methods=['GET'])
 def download_file(unique_id):
