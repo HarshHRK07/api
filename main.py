@@ -161,36 +161,22 @@ def get_claude_response():
     response_dict = {'response': combined_content}
     
     return jsonify(response_dict)
-
 @app.route('/openai/gpt', methods=['GET'])
-def openai_endpoint():
-    gpt_prompt = request.args.get('prompt')
-    gpt_url = "https://chatgpt-online.one/wp-admin/admin-ajax.php"
-    nonce = '2739d59e4f'
-
+def custom_gpt_prompt():
+    prompt = request.args.get('prompt', '')
+    url = f"https://chatgpt.apinepdev.workers.dev/?question={prompt}"
+    
     try:
-        data = [
-            ('_wpnonce', (None, nonce)),
-            ('action', (None, 'wpaicg_chat_shortcode_message')),
-            ('message', (None, gpt_prompt))
-        ]
-
-        headers = {
-            'User-Agent': "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Mobile Safari/537.36"
-        }
-
-        response = requests.post(gpt_url, files=data, headers=headers)
-
+        response = requests.get(url)
         if response.status_code == 200:
-            json_response = response.json()
-            data_response = json_response.get('data')
-            data_response += '\nDeveloper: Harsh (TG ID = @HRK_07)'
-            
-            return jsonify({"response": data_response})
+            data = response.json()
+            response_text = f"{data['answer']}\nDeveloper: Harsh (TG ID = @HRK_07)"
+            return jsonify({"response": response_text})
         else:
-            return jsonify({"error": "Failed to send message. Status code: {}".format(response.status_code)})
+            return jsonify({"error": f"Failed to fetch data from {url}", "status_code": response.status_code})
     except Exception as e:
-        return jsonify({"error": "An error occurred: {}".format(e)})
+        return jsonify({"error": str(e)})
+
 @app.route('/custom/khushi')
 def custom_endpoint():
     prompt = request.args.get('prompt', default='', type=str)
