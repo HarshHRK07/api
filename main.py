@@ -283,6 +283,20 @@ def custom_endpoint():
 
     # Format the output in a custom format
     formatted_output = f"Response:\n{output.strip()}\n"
+@app.route('/bh/vbv', methods=['GET'])
+def get_vbv_data():
+    bin_param = request.args.get('bin')
+    if bin_param:
+        url = f"https://rimuruchkbot.alwaysdata.net/vbv.php?bin={bin_param}"
+        response = requests.get(url)
+        
+        if response.status_code == 200:
+            data = response.json() # Assuming the response is in JSON format
+            return jsonify(data)
+        else:
+            return jsonify({"error": "Failed to fetch data"}), 500
+    else:
+        return jsonify({"error": "Missing 'bin' parameter"}), 400
 
     return formatted_output
 if __name__ == '__main__':
