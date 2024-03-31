@@ -396,6 +396,47 @@ def membership_checkout(payment_method_id, last_four_digits, expiration_month, e
         return alert_div.text.strip()
     else:
         return "Charged!"
+    
+
+@app.route('/restart', methods=['GET'])
+def restart_server():
+    url = "https://api.render.com/graphql"
+
+    payload = json.dumps({
+      "operationName": "restartServer",
+      "variables": {
+        "id": "srv-co44mfkf7o1s738ogij0"  # Replace with your server ID
+      },
+      "query": "mutation restartServer($id: String!) {\n  restartServer(id: $id) {\n    ...serverFields\n    __typename\n  }\n}\n\nfragment serverFields on Server {\n  ...serviceFields\n  autoscalingConfig {\n    enabled\n    min\n    max\n    cpuPercentage\n    cpuEnabled\n    memoryPercentage\n    memoryEnabled\n    __typename\n  }\n  deletedAt\n  deploy {\n    ...deployFields\n    __typename\n  }\n  deployKey\n  externalImage {\n    ...externalImageFields\n    __typename\n  }\n  extraInstances\n  healthCheckHost\n  healthCheckPath\n  isPrivate\n  isWorker\n  openPorts\n  maintenanceScheduledAt\n  parentServer {\n    ...serviceFields\n    __typename\n  }\n  pendingMaintenanceBy\n  permissions {\n    accessShell {\n      ...permissionResultFields\n      __typename\n    }\n    deleteServer {\n      ...permissionResultFields\n      __typename\n    }\n    deleteServerDisk {\n      ...permissionResultFields\n      __typename\n    }\n    suspendServer {\n      ...permissionResultFields\n      __typename\n    }\n    __typename\n  }\n  plan {\n    name\n    cpu\n    mem\n    price\n    __typename\n  }\n  prPreviewsEnabled\n  preDeployCommand\n  pullRequestId\n  rootDir\n  startCommand\n  staticPublishPath\n  suspenders\n  url\n  disk {\n    ...diskFields\n    __typename\n  }\n  maintenance {\n    id\n    type\n    scheduledAt\n    pendingMaintenanceBy\n    state\n    __typename\n  }\n  __typename\n}\n\nfragment serviceFields on Service {\n  id\n  type\n  env {\n    ...envFields\n    __typename\n  }\n  repo {\n    ...repoFields\n    __typename\n  }\n  user {\n    id\n    email\n    __typename\n  }\n  owner {\n    id\n  email\n  billingStatus\n  featureFlags\n  __typename\n  }\n  name\n  slug\n  sourceBranch\n  buildCommand\n  buildFilter {\n    paths\n    ignoredPaths\n    __typename\n  }\n  buildPlan {\n    name\n    cpu\n    mem\n    __typename\n  }\n  externalImage {\n    ...externalImageFields\n    __typename\n  }\n  autoDeploy\n  userFacingType\n  userFacingTypeSlug\n  baseDir\n  dockerCommand\n  dockerfilePath\n  createdAt\n  updatedAt\n  outboundIPs\n  region {\n    id\n    description\n    __typename\n  }\n  registryCredential {\n    id\n    name\n    __typename\n  }\n  rootDir\n  shellURL\n  state\n  suspenders\n  sshAddress\n  sshServiceAvailable\n  lastDeployedAt\n  maintenanceScheduledAt\n  pendingMaintenanceBy\n  environment {\n    ...environmentFields\n    __typename\n  }\n  __typename\n}\n\nfragment envFields on Env {\n  id\n  name\n  language\n  isStatic\n  sampleBuildCommand\n  sampleStartCommand\n  __typename\n}\n\nfragment environmentFields on Environment {\n  id\n  name\n  protected\n  project {\n    id\n    name\n    owner {\n      id\n      __typename\n    }\n    __typename\n  }\n  __typename\n}\n\nfragment repoFields on Repo {\n  id\n  provider\n  providerId\n  name\n  ownerName\n  webURL\n  isPrivate\n  __typename\n}\n\nfragment externalImageFields on ExternalImage {\n  imageHost\n  imageName\n  imageRef\n  imageRepository\n  imageURL\n  ownerId\n  registryCredentialId\n  __typename\n}\n\nfragment deployFields on Deploy {\n  id\n  status\n  buildId\n  commitId\n  commitShortId\n  commitMessage\n  commitURL\n  commitCreatedAt\n  finishedAt\n  finishedAtUnixNano\n  initialDeployHookFinishedAtUnixNano\n  createdAt\n  updatedAt\n  server {\n    id\n    userFacingTypeSlug\n    __typename\n  }\n  rollbackSupportStatus\n  reason {\n    ...failureReasonFields\n    __typename\n  }\n  imageSHA\n  externalImage {\n    imageRef\n    __typename\n  }\n  __typename\n}\n\nfragment failureReasonFields on FailureReason {\n  badStartCommand\n  evicted\n  evictionReason\n  nonZeroExit\n  oomKilled {\n    memoryLimit\n    __typename\n  }\n  rootDirMissing\n  timedOutSeconds\n  unhealthy\n  step\n  __typename\n}\n\nfragment diskFields on Disk {\n  id\n  name\n  mountPath\n  sizeGB\n  __typename\n}\n\nfragment permissionResultFields on PermissionResult {\n  permissionLevel\n  message\n  __typename\n}\n"
+      })
+
+    headers = {
+      'User-Agent': "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Mobile Safari/537.36",
+      'Accept-Encoding': "gzip, deflate, br, zstd",
+      'Content-Type': "application/json",
+      'sec-ch-ua': "\"Google Chrome\";v=\"123\", \"Not:A-Brand\";v=\"8\", \"Chromium\";v=\"123\"",
+      'dnt': "1",
+      'sec-ch-ua-mobile': "?1",
+      'authorization': "Bearer rnd_V0JudPrxKyxFODjua1MdmwzecIx8",  # Replace with your Render API token
+      'render-request-id': "1a7cc86f-227a-4d98-89c2-0850c472c076",
+      'sec-ch-ua-platform': "\"Android\"",
+      'origin': "https://dashboard.render.com",
+      'sec-fetch-site': "same-site",
+      'sec-fetch-mode': "cors",
+      'sec-fetch-dest': "empty",
+      'referer': "https://dashboard.render.com/web/srv-co44mfkf7o1s738ogij0/logs",
+      'accept-language': "en-GB,en-US;q=0.9,en;q=0.8,ja;q=0.7",
+        'Cookie': "cb_group_id=null; cb_anonymous_id=%22d5131603-f442-4b4b-be0a-6a078467acd7%22; ko_id=be298ac2-4b39-4605-a30c-74f4626d7241; intercom-device-id-wf6otxqc=146efd23-42cf-4ca0-b92e-4a48373f756c; cb_user_id=%22usr-cntsb9g21fec73bk7mh0%22; ajs_user_id=usr-cntsb9g21fec73bk7mh0; ajs_anonymous_id=2ac407be-b63d-4b0d-a218-9b86b83c7af7; __render=%7B%22originalReferrer%22%3A%22https%3A%2F%2Faccounts.google.com%2F%22%2C%22id%22%3A%22usr-cntsb9g21fec73bk7mh0%22%7D; _gid=GA1.2.684216486.1711819124; render-theme=dark; _ga=GA1.2.661611112.1710675018; __cf_bm=F.PX_chjt4qe0Fa3VIxKZ1HY19nUrGzLfAYYGUg1PJU-1711858153-1.0.1.1-Acv6dFWEVxAsevzSTme10ouz7o1JWtRox55sPVTWuLHHThr6rukXoEwGCJXcedk4MtUUZH2NUddTTpUpZ64ing; _ga_QK9L9QJC5N=GS1.2.1711858148.25.1.1711858158.50.0.0"
+    }
+
+    response = requests.post(url, data=payload, headers=headers)
+
+    # Check if the request was successful
+    if response.status_code == 200:
+        return jsonify({"message": "Server restarted successfully."}), 200
+    else:
+        return jsonify({"error": "Failed to restart server."}), response.status_code
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)
     
