@@ -9,7 +9,7 @@ DOMAIN_KEYS_MAPPING = {
         rb"source_data\[card\]\[cvc\]"
     ],
     "cloud.boosteroid.com": [
-        rb"encryptedSecurityCode\": \"([^\"]+)\""
+        rb"encryptedSecurityCode\": \"([^\"\\]+)"
     ],
     # Add more domains as needed
 }
