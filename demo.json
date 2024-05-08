@@ -1,0 +1,16 @@
+{
+    "api.stripe.com": [
+        "payment_method_data[card][cvc]",
+        "card[cvc]",
+        "source_data[card][cvc]"
+    ],
+    "cloud.boosteroid.com": [
+        "encryptedSecurityCode\": \"([^\"\\]+)"
+    ],
+    "api.checkout.com": [
+        "\"cvv\": \"(\\d{3,4})"
+    ],
+    "daisysms.com": [
+        "\"cvc\":\"(\\d{3,4})"
+    ]
+}
