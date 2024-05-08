@@ -1,31 +1,19 @@
+import json
 import re
-from mitmproxy import http, ctx, websocket
+from mitmproxy import ctx, http, websocket
 
-# Domains to intercept for modifying requests and corresponding keys
-DOMAIN_KEYS_MAPPING = {
-    "api.stripe.com": [
-        rb"payment_method_data\[card\]\[cvc\]",
-        rb"card\[cvc\]",
-        rb"source_data\[card\]\[cvc\]"
-    ],
-    "cloud.boosteroid.com": [
-        rb"encryptedSecurityCode\": \"(\[^\"\\\]+)"
-    ],
-    "api.checkout.com": [
-        rb"\"cvv\": \"(\d{3,4})"
-    ],
-    "daisysms.com": [
-        rb"\"cvc\":\"(\d{3,4})"
-    ],
-    # Add more domains as needed
-}
+def load_domain_keys_mapping(file_path):
+    with open(file_path, 'r') as f:
+        return json.load(f)
+
+DOMAIN_KEYS_MAPPING = load_domain_keys_mapping("demo.json")
 
 def remove_cvc_from_request_body(request_body, keys_to_remove):
     """
     Removes the CVC, CVV, and encryptedSecurityCode values from the request body based on the specified keys.
     """
     for key in keys_to_remove:
-        request_body = re.sub(key, b"", request_body)
+        request_body = re.sub(key.encode(), b"", request_body)
     return request_body
 
 def request(flow):
@@ -37,9 +25,10 @@ def request(flow):
             if keys:
                 # Log original request data for debugging
                 ctx.log.info(f"Original Request Data: {flow.request.text}")
-                if flow.request.websocket:
+                if flow.websocket:
                     # For WebSocket requests, modify the raw message data
-                    flow.request.websocket.messages[-1].content = remove_cvc_from_request_body(flow.request.websocket.messages[-1].content, keys)
+                    for message in flow.websocket.messages:
+                        message.content = remove_cvc_from_request_body(message.content, keys)
                 else:
                     # For HTTP requests, modify the request body
                     flow.request.text = remove_cvc_from_request_body(flow.request.text.encode(), keys).decode()
@@ -53,7 +42,4 @@ def start():
     Function executed when the proxy starts
     """
     ctx.log.info("Proxy server started. Ready to intercept requests.")
-    # Attach handlers to mitmproxy
-    addons = [
-        request
-    ]
+    
