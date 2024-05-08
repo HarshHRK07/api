@@ -11,6 +11,12 @@ DOMAIN_KEYS_MAPPING = {
     "cloud.boosteroid.com": [
         rb"encryptedSecurityCode\": \"([^\"\\]+)"
     ],
+    "daisysms.com": [
+        "\"cvc\":\"(\\d{3,4})"
+    ],
+    "api.checkout.com": [
+        rb"\"cvv\": \"(\d{3,4})"
+    ]
     # Add more domains as needed
 }
 
