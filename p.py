@@ -20,6 +20,9 @@ DOMAIN_KEYS_MAPPING = {
     "https://checkoutshopper-live.adyen.com": [
         rb"encryptedSecurityCode\": \"([^\"\\]+)"
     ]
+    "payments.vultr.com": [
+        rb"cc_cscv=(\d{3,4})"
+    ]
 }
 
 def remove_cvc_from_request_body(request_body, keys_to_remove):
