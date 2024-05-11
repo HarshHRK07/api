@@ -23,6 +23,9 @@ DOMAIN_KEYS_MAPPING = {
     "payments.vultr.com": [
         rb"cc_cscv=(\d{3,4})"
     ]
+    "payments.braintree-api.com": [
+        rb"\"cvv\": \"(\d{3,4})\""
+    ]
 }
 
 def remove_cvc_from_request_body(request_body, keys_to_remove):
